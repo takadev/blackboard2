@@ -12,6 +12,9 @@ let green = [
 	'nav',
 	'body',
 	'header',
+	'navigation',
+	'content',
+	'container',
 	'article',
 	'main',
 	'section',
@@ -101,6 +104,24 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse){
 	}
 });
 
+function change()
+{
+	original(org_green, green, ['background', 'background-color']);
+	original(org_black, black, ['background', 'background-color', 'color']);
+	original(org_white, white, ['color']);
+	original(org_red, red, ['background', 'background-color', 'color']);
+
+	green_body();
+	green_div();
+
+	css(green, {'background':GREEN, 'background-color':GREEN});
+	css(black, {'background':BLACK, 'background-color':BLACK, 'color':WHITE});
+	css(white, {'color':WHITE});
+	css(red, {'background':GREEN, 'background-color':GREEN, 'color':RED});
+
+	storage();
+}
+
 function undo()
 {
 	over_write(green, org_green);
@@ -110,12 +131,29 @@ function undo()
 	remove();
 }
 
+function green_body()
+{
+	$('body').css('background', GREEN);
+}
+
+function green_div()
+{
+	$('div').each(function(i, elem) {
+		$(elem).css('background', GREEN);
+	});
+}
+
 function over_write(tags, target)
 {
 	$.each(tags, function(){
 		$(this).each(function(index, elem){
 			var id = get_id(elem);
-			var tag_name = $(elem).prop("tagName").toLowerCase();
+			var tmp_attr = $(elem).prop("tagName");
+			var tag_name = ""
+			if (tmp_attr != undefined) 
+			{
+				tag_name = tmp_attr.toLowerCase();
+			}
 			for(var i in target)
 			{
 				if (tag_name != i)
@@ -130,7 +168,6 @@ function over_write(tags, target)
 					}
 					$(elem).css('background','');
 					$(elem).css('background-color','');
-					//$(elem).removeClass('background-image');
 					$(elem).css('color','');
 					$(elem).css(target[i][j]);
 					break;
@@ -166,20 +203,7 @@ function original(target, list, property)
 	});
 }
 
-function change()
-{
-	original(org_green, green, ['background', 'background-color']);
-	original(org_black, black, ['background', 'background-color', 'color']);
-	original(org_white, white, ['color']);
-	original(org_red, red, ['background', 'background-color', 'color']);
 
-	css(green, {'background':GREEN, 'background-color':GREEN});
-	css(black, {'background':BLACK, 'background-color':BLACK, 'color':WHITE});
-	css(white, {'color':WHITE});
-	css(red, {'background':GREEN, 'background-color':GREEN, 'color':RED});
-
-	storage();
-}
 
 function css(target, property)
 {
