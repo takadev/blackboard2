@@ -14,7 +14,7 @@
   },
   "content_scripts": [{
     "matches": ["<all_urls>"],
-    "js": ["scripts/script.js"]
+    "js": ["scripts/jquery.min.js","scripts/script.js"]
   }],
   "browser_action": {
     "default_icon": "images/icon_16.png",
