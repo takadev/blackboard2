@@ -140,6 +140,7 @@ function green_div()
 {
 	$('div').each(function(i, elem) {
 		$(elem).css('background', GREEN);
+		$(elem).css('background-color', GREEN);
 	});
 }
 
