@@ -114,7 +114,7 @@ function change()
 	green_body();
 	green_div();
 
-	css(green, {'background':GREEN, 'background-color':GREEN});
+	css(green, {'background':GREEN, 'background-color':GREEN, 'color':WHITE});
 	css(black, {'background':BLACK, 'background-color':BLACK, 'color':WHITE});
 	css(white, {'color':WHITE});
 	css(red, {'background':GREEN, 'background-color':GREEN, 'color':RED});
