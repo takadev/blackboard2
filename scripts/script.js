@@ -107,15 +107,15 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse){
 function change()
 {
 	original(org_green, green, ['background', 'background-color']);
-	original(org_black, black, ['background', 'background-color', 'color']);
+	//original(org_black, black, ['background', 'background-color', 'color']);
 	original(org_white, white, ['color']);
 	original(org_red, red, ['background', 'background-color', 'color']);
 
 	green_body();
 	green_div();
 
-	css(green, {'background':GREEN, 'background-color':GREEN, 'color':WHITE});
-	css(black, {'background':BLACK, 'background-color':BLACK, 'color':WHITE});
+	//css(green, {'background':GREEN, 'background-color':GREEN, 'color':WHITE});
+	//css(black, {'background':BLACK, 'background-color':BLACK, 'color':WHITE});
 	css(white, {'color':WHITE});
 	css(red, {'background':GREEN, 'background-color':GREEN, 'color':RED});
 
@@ -125,7 +125,7 @@ function change()
 function undo()
 {
 	over_write(green, org_green);
-	over_write(black, org_black);
+	//over_write(black, org_black);
 	over_write(white, org_white);
 	over_write(red, org_red);
 	remove();
@@ -208,8 +208,8 @@ function original(target, list, property)
 
 function css(target, property)
 {
-	$.each(target, function(){
-		$(this).each(function(index, element){
+	$.each(target, function(i, elem){
+		$(elem).each(function(index, element){
 			$(element).css(property);
 		});
 	});
